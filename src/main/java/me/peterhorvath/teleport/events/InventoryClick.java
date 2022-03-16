@@ -1,8 +1,10 @@
 package me.peterhorvath.teleport.events;
 
 import me.peterhorvath.teleport.Teleport;
+import me.peterhorvath.teleport.gui.TeleportConfirm;
 import me.peterhorvath.teleport.gui.TeleportToMenu;
 import me.peterhorvath.teleport.utils.pickers.ColorPicker;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -37,10 +39,24 @@ public class InventoryClick implements Listener {
                 assert meta != null;
                 Player target = (Player) meta.getOwningPlayer();
                 assert target != null;
-                player.teleport(target.getLocation());
+                if(Objects.equals(player.getCustomName(), "bedrock")){
+                    player.closeInventory();
+                    TeleportConfirm.openConfirmMenu(player, event.getCurrentItem());
+                }else{
+                    player.teleport(target.getLocation());
+                }
                 break;
             default:
                 break;
+        }
+        if(event.getView().getTitle().startsWith(TeleportConfirm.titleBase)){
+            if(event.getCurrentItem().getType() == TeleportConfirm.acceptMaterial){
+                Player target = Bukkit.getPlayer(event.getView().getTitle());;
+                assert target != null;
+                player.teleport(target.getLocation());
+            }else if(event.getCurrentItem().getType() == TeleportConfirm.cancelMaterial){
+                player.closeInventory();
+            }
         }
         event.setCancelled(true);
     }
