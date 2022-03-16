@@ -1,5 +1,6 @@
 package me.peterhorvath.teleport.gui;
 
+import me.peterhorvath.teleport.Teleport;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -23,6 +24,7 @@ public class TeleportToMenu {
         for (int i = 0; i < playerNumber; i++) {
             if(players.get(i) == player) continue;
             inv.setItem(invIndex, PlayerHead.getPlayerHead(players.get(i), ChatColor.GOLD, true));
+            Teleport.getPlugin(Teleport.class).getLogger().info(players.get(0).getDisplayName() + " : " + invIndex);
             invIndex++;
         }
         player.openInventory(inv);
