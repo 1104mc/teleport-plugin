@@ -22,9 +22,9 @@ public class TeleportToMenu {
         List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
         int invIndex = 0;
         for (int i = 0; i < playerNumber; i++) {
-            if(players.get(i) == player) continue;
+            if(players.get(i).getDisplayName().equals(player.getDisplayName())) continue;
             inv.setItem(invIndex, PlayerHead.getPlayerHead(players.get(i), ChatColor.GOLD, true));
-            Teleport.getPlugin(Teleport.class).getLogger().info(players.get(0).getDisplayName() + " : " + invIndex);
+            Teleport.getPlugin(Teleport.class).getLogger().info(players.get(i).getDisplayName() + " : " + invIndex);
             invIndex++;
         }
         player.openInventory(inv);
