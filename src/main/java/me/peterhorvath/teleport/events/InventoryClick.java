@@ -36,7 +36,7 @@ public class InventoryClick implements Listener {
                 break;
             case "Teleportálás játékoshoz":
                 SkullMeta meta = (SkullMeta) Objects.requireNonNull(event.getCurrentItem()).getItemMeta();
-                assert meta != null;
+                if(meta == null) break;
                 Player target = (Player) meta.getOwningPlayer();
                 assert target != null;
                 if(Objects.equals(player.getCustomName(), "bedrock")){
