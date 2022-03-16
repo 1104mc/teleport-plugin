@@ -20,12 +20,9 @@ public class TeleportToMenu {
         else if(playerNumber <= 9) inv = Bukkit.createInventory(player, 9, title);
         else inv = Bukkit.createInventory(player, playerNumber, title);
         List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
-        int invIndex = 0;
         for (int i = 0; i < playerNumber; i++) {
             if(players.get(i).getDisplayName().equals(player.getDisplayName())) continue;
-            inv.setItem(invIndex, PlayerHead.getPlayerHead(players.get(i), ChatColor.GOLD, true));
-            Teleport.getPlugin(Teleport.class).getLogger().info(players.get(i).getDisplayName() + " : " + invIndex);
-            invIndex++;
+            inv.setItem(i, PlayerHead.getPlayerHead(players.get(i), ChatColor.GOLD, true));
         }
         player.openInventory(inv);
     }
