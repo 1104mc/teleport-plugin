@@ -35,6 +35,7 @@ public class InventoryClick implements Listener {
                 }
                 break;
             case "Teleportálás játékoshoz":
+                if(event.getCurrentItem() == null) break;
                 SkullMeta meta = (SkullMeta) Objects.requireNonNull(event.getCurrentItem()).getItemMeta();
                 if(meta == null) break;
                 Player target = (Player) meta.getOwningPlayer();
