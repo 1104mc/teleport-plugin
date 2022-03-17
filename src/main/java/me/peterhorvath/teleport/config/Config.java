@@ -29,6 +29,8 @@ public class Config {
         }catch (FileNotFoundException ex){
             Teleport.logger.info(file.getPath());
             ex.printStackTrace();
+        }catch (NoSuchElementException ex){
+            Teleport.logger.info("Üres a konfig!");
         }
     }
 
