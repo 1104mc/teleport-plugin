@@ -10,12 +10,13 @@ import java.util.Objects;
 
 public final class Teleport extends JavaPlugin {
     public static File configDir;
-    public static final Config waypointConfig = new Config();
+    public static Config waypointConfig;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         configDir = getDataFolder();
+        waypointConfig = new Config();
         Objects.requireNonNull(getCommand("tp")).setExecutor(new Tp());
         getServer().getPluginManager().registerEvents(new InventoryClick(), this);
     }
