@@ -16,6 +16,7 @@ public class TeleportToMenu {
         int playerNumber = Bukkit.getOnlinePlayers().size() - 1;
         if(playerNumber == 0){
             player.sendMessage("Nem tudjuk megnyitni a menüt mert csak te vagy fönn a szerveren!");
+            return;
         }
         Inventory inv;
         String title = "Teleportálás játékoshoz";
