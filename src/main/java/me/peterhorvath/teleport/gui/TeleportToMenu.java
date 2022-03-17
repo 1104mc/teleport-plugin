@@ -23,7 +23,7 @@ public class TeleportToMenu {
         players.remove(player);
         for (int i = 0; i < playerNumber; i++) {
             if(players.get(i).getDisplayName().equals(player.getDisplayName())) continue;
-            inv.setItem(i, PlayerHead.getPlayerHead(players.get(i), ChatColor.GOLD, true));
+            if(players.get(i) != null) inv.setItem(i, PlayerHead.getPlayerHead(players.get(i), ChatColor.GOLD, true));
         }
         player.openInventory(inv);
     }

@@ -1,5 +1,5 @@
 name: Teleport
-version: '${project.version}'
+version: 1.0
 main: me.peterhorvath.teleport.Teleport
 api-version: 1.18
 commands:
