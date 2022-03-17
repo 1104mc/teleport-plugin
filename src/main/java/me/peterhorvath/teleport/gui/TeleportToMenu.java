@@ -20,6 +20,7 @@ public class TeleportToMenu {
         else if(playerNumber <= 9) inv = Bukkit.createInventory(player, 9, title);
         else inv = Bukkit.createInventory(player, playerNumber, title);
         List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
+        players.remove(player);
         for (int i = 0; i < playerNumber; i++) {
             if(players.get(i).getDisplayName().equals(player.getDisplayName())) continue;
             inv.setItem(i, PlayerHead.getPlayerHead(players.get(i), ChatColor.GOLD, true));
