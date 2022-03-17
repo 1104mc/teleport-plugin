@@ -13,7 +13,10 @@ import java.util.List;
 
 public class TeleportToMenu {
     public static void openTeleportToPlayerMenu(Player player){
-        int playerNumber = Bukkit.getOnlinePlayers().size();
+        int playerNumber = Bukkit.getOnlinePlayers().size() - 1;
+        if(playerNumber == 0){
+            player.sendMessage("Nem tudjuk megnyitni a menüt mert csak te vagy fönn a szerveren!");
+        }
         Inventory inv;
         String title = "Teleportálás játékoshoz";
         if(playerNumber <= 5) inv = Bukkit.createInventory(player, InventoryType.HOPPER, title);
