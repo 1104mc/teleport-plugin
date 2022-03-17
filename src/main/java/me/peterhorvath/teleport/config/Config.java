@@ -30,6 +30,7 @@ public class Config {
         try{
             json = new Gson().fromJson(new Scanner(file).next(), WaypointData[].class);
         }catch (FileNotFoundException ex){
+            Teleport.logger.info(file.getPath());
             ex.printStackTrace();
         }
     }

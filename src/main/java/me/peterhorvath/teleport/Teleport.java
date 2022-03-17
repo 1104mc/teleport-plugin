@@ -7,14 +7,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public final class Teleport extends JavaPlugin {
     public static File configDir;
     public static Config waypointConfig;
+    public static Logger logger;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
+        logger = getLogger();
         configDir = getDataFolder();
         waypointConfig = new Config();
         Objects.requireNonNull(getCommand("tp")).setExecutor(new Tp());
