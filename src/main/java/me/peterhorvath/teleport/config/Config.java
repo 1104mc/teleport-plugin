@@ -1,7 +1,6 @@
 package me.peterhorvath.teleport.config;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import me.peterhorvath.teleport.Teleport;
 import me.peterhorvath.teleport.model.Waypoint;
 import me.peterhorvath.teleport.model.WaypointData;
@@ -9,9 +8,7 @@ import me.peterhorvath.teleport.model.WaypointData;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Config {
     private final File file;
@@ -35,11 +32,11 @@ public class Config {
         }
     }
 
-    public Waypoint[] getWaypoints(){
-        List<Waypoint> waypoints = new ArrayList<>();
+    public Map<String, Waypoint> getWaypoints(){
+        Map<String, Waypoint> waypoints = new HashMap<>();
         for (WaypointData data: json) {
-            waypoints.add(data.generateWaypoint());
+            waypoints.put(data.getId(),data.generateWaypoint());
         }
-        return waypoints.toArray(Waypoint[]::new);
+        return waypoints;
     }
 }

@@ -8,12 +8,16 @@ public class WaypointData {
     private String type;
     private String color;
     private String name;
+    private String id;
     private LocationData loc;
-
 
 
     public Waypoint generateWaypoint(){
         return new Waypoint(ConfigConstans.blocks.get(type),
                 ColorManager.getColorByString(this.color), this.loc.toLocation(), this.name);
+    }
+
+    public String getId() {
+        return id;
     }
 }
