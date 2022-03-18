@@ -5,6 +5,7 @@ import me.peterhorvath.teleport.Teleport;
 import me.peterhorvath.teleport.model.Waypoint;
 import me.peterhorvath.teleport.model.WaypointData;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class Config {
     private final File file;
     private WaypointData[] json;
 
-    public Config() {
+    public Config() throws EOFException {
         if(!Teleport.configDir.exists()) Teleport.configDir.mkdir();
         file = new File(Teleport.configDir, ConfigConstans.waypointFilename);
         if(!file.exists()){
@@ -24,11 +25,15 @@ public class Config {
                 ex.printStackTrace();
             }
         }
+        String data = null;
         try{
-            json = new Gson().fromJson(new Scanner(file).next(), WaypointData[].class);
-        }catch (FileNotFoundException ex){
-            Teleport.logger.info(file.getPath());
-            ex.printStackTrace();
+            data = new Scanner(file).next();
+        }catch(FileNotFoundException ex){
+            Teleport.logger.info("Nem található konfig!");
+        }
+        Teleport.logger.info(data);
+        try{
+            json = new Gson().fromJson(data, WaypointData[].class);
         }catch (NoSuchElementException ex){
             Teleport.logger.info("Üres a konfig!");
         }
