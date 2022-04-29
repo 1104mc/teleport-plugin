@@ -31,7 +31,10 @@ public class Tp implements CommandExecutor {
         }else if(args.length == 1){
             //TODO: go to waypoint
             if(args[0].equalsIgnoreCase("help")){
-                player.sendMessage(ChatColor.GREEN + player.getLocale());
+                String locatedTitle = "";
+                if(player.getLocale().equals("en_us")) locatedTitle = "The places where you can go";
+                else if(player.getLocale().equals("hu_hu")) locatedTitle = "A helyek ahová mehetsz";
+                player.sendMessage(ChatColor.GREEN + locatedTitle);
             }
         }else if(args.length == 3){
             //TODO: go to position

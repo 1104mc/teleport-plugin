@@ -10,6 +10,7 @@ public class Reload implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!sender.isOp()) return false;
         Teleport.waypointConfig.reload();
+        Teleport.waypoints = Teleport.waypointConfig.getAllWaypoints();
         sender.sendMessage("Reloaded...");
         return true;
     }

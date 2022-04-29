@@ -3,6 +3,7 @@ package me.peterhorvath.teleport;
 import me.peterhorvath.teleport.commands.Reload;
 import me.peterhorvath.teleport.commands.Tp;
 import me.peterhorvath.teleport.events.InventoryClick;
+import me.peterhorvath.teleport.model.Waypoint;
 import me.peterhorvath.teleport.utils.ConfigUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,6 +15,7 @@ import java.util.logging.Logger;
 public final class Teleport extends JavaPlugin {
     public static File configDir;
     public static ConfigUtil waypointConfig;
+    public static Waypoint[] waypoints;
     public static Logger logger;
 
     @Override
@@ -22,6 +24,7 @@ public final class Teleport extends JavaPlugin {
         logger = getLogger();
         configDir = getDataFolder();
         waypointConfig = new ConfigUtil();
+        waypoints = waypointConfig.getAllWaypoints();
         Objects.requireNonNull(getCommand("tp")).setExecutor(new Tp());
         getCommand("reload").setExecutor(new Reload());
         getServer().getPluginManager().registerEvents(new InventoryClick(), this);
