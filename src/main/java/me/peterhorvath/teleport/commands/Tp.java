@@ -28,10 +28,9 @@ public class Tp implements CommandExecutor {
         if(!(sender instanceof Player)) return false;
         Player player = ((Player) sender).getPlayer();
         assert player != null;
-        Teleport.logger.info(label);
         if(args.length == 0){
             MainMenu.openMainMenu(player);
-        }else if(args.length == 1 || label.startsWith("tp \"")){
+        }else if(args.length == 1 || args[0].startsWith("\"")){
             // go to waypoint
             if(args[0].equalsIgnoreCase("help")){
                 String locatedTitle = "";
