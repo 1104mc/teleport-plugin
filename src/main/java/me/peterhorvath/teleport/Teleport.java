@@ -1,8 +1,9 @@
 package me.peterhorvath.teleport;
 
+import me.peterhorvath.teleport.commands.Reload;
 import me.peterhorvath.teleport.commands.Tp;
-import me.peterhorvath.teleport.config.Config;
 import me.peterhorvath.teleport.events.InventoryClick;
+import me.peterhorvath.teleport.utils.ConfigUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.EOFException;
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
 
 public final class Teleport extends JavaPlugin {
     public static File configDir;
-    //public static Config waypointConfig;
+    public static ConfigUtil waypointConfig;
     public static Logger logger;
 
     @Override
@@ -20,12 +21,9 @@ public final class Teleport extends JavaPlugin {
         // Plugin startup logic
         logger = getLogger();
         configDir = getDataFolder();
-        /*try {
-            waypointConfig = new Config();
-        } catch (EOFException e) {
-            e.printStackTrace();
-        }*/
+        waypointConfig = new ConfigUtil();
         Objects.requireNonNull(getCommand("tp")).setExecutor(new Tp());
+        getCommand("reload").setExecutor(new Reload());
         getServer().getPluginManager().registerEvents(new InventoryClick(), this);
     }
 
