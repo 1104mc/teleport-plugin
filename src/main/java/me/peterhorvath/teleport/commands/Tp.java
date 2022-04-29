@@ -27,11 +27,10 @@ public class Tp implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!(sender instanceof Player)) return false;
         Player player = ((Player) sender).getPlayer();
-        Teleport.logger.info("Number of arguments: " + args.length);
         assert player != null;
         if(args.length == 0){
             MainMenu.openMainMenu(player);
-        }else if(args.length == 1){
+        }else if(args.length == 1 || label.startsWith("tp \"")){
             // go to waypoint
             if(args[0].equalsIgnoreCase("help")){
                 String locatedTitle = "";
@@ -46,8 +45,21 @@ public class Tp implements CommandExecutor {
                     player.spigot().sendMessage(msg);
                 }
             }else{
+                String place = args[0];
+                if(args[0].startsWith("\"")){
+                    StringBuilder sb = new StringBuilder();
+                    for (String arg: args) {
+                        StringBuilder argBuilder = new StringBuilder();
+                        for(char ac: arg.toCharArray()){
+                            if(!(ac == '"')) argBuilder.append(ac);
+                        }
+                        String add = argBuilder.toString() + " ";
+                        sb.append(add);
+                    }
+                    place = sb.toString();
+                }
                 boolean succeed = false;
-                Teleport.logger.info("Preparing to teleport player " + player.getName() + " to " + args[0]);
+                Teleport.logger.info("Preparing to teleport player " + player.getName() + " to " + place);
                 for (Waypoint wp: Teleport.waypoints) {
                     if(wp.getName(false).equals(args[0])){
                         succeed = true;
