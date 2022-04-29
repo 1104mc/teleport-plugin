@@ -35,6 +35,10 @@ public class Tp implements CommandExecutor {
                 if(player.getLocale().equals("en_us")) locatedTitle = "The places where you can go";
                 else if(player.getLocale().equals("hu_hu")) locatedTitle = "A helyek ahová mehetsz";
                 player.sendMessage(ChatColor.GREEN + locatedTitle);
+
+                for (Waypoint waypoint: Teleport.waypoints) {
+                    player.sendMessage(waypoint.toLocaleString(player.getLocale()));
+                }
             }
         }else if(args.length == 3){
             //TODO: go to position

@@ -44,4 +44,23 @@ public class Waypoint {
     public String toString(){
         return getName() + " at " + getLocation();
     }
+
+    public String toLocaleString(String locale){
+        String localedAt = "";
+        if(locale.equals("en_us")) localedAt = " at ";
+        else if(locale.equals("hu_hu")) localedAt = " itt: ";
+        String localedWorld = "";
+        String mc_world_name = getLocation().getWorld().getName();
+        if(locale.equals("hu_hu")){
+            if(mc_world_name.endsWith("nether")) localedWorld = "az alvilágban";
+            else if(mc_world_name.endsWith("end")) localedWorld = "a végben";
+            else localedWorld = "a normál világban";
+        }else{
+            if(mc_world_name.endsWith("nether")) localedWorld = "in the nether";
+            else if(mc_world_name.endsWith("end")) localedWorld = "in the End";
+            else localedWorld = "in the normal world";
+        }
+        Location loc = getLocation();
+        return getName() + localedAt + "X: " + loc.getBlockX() + " Y: " + loc.getBlockY() + " Z: " + loc.getBlockZ() + " " + localedWorld;
+    }
 }
