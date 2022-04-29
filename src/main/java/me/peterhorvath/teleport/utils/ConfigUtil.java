@@ -1,13 +1,15 @@
 package me.peterhorvath.teleport.utils;
 
 import me.peterhorvath.teleport.Teleport;
-import org.bukkit.Bukkit;
+import me.peterhorvath.teleport.model.Waypoint;
+import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ConfigUtil {
     private File file;
@@ -30,22 +32,23 @@ public class ConfigUtil {
         return config;
     }
 
-    public void setConfig(FileConfiguration config) {
-        this.config = config;
+    public Waypoint[] getAllWaypoints(){
+        ArrayList<Waypoint> waypoints = new ArrayList<>();
+        this.config.getConfigurationSection("places").getKeys(false).forEach(waypoint -> {
+            String wp_path = "places." + waypoint;
+            Waypoint wp = new Waypoint(Material.getMaterial(this.config.getString(wp_path + ".type")),
+                    ColorManager.getColorByString(this.config.getString(wp_path + ".color")),
+                    this.config.getLocation(wp_path + ".location"),
+                    this.config.getString(wp_path + ".name"));
+            waypoints.add(wp);
+        });
+        return (Waypoint[]) waypoints.toArray();
     }
 
     public void reload(){
         try {
             this.config.load(file);
         } catch (IOException | InvalidConfigurationException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void save(){
-        try {
-            this.config.save(file);
-        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

@@ -3,7 +3,9 @@ package me.peterhorvath.teleport.commands;
 import me.peterhorvath.teleport.Teleport;
 import me.peterhorvath.teleport.gui.MainMenu;
 
+import me.peterhorvath.teleport.model.Waypoint;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,6 +30,9 @@ public class Tp implements CommandExecutor {
             MainMenu.openMainMenu(player);
         }else if(args.length == 1){
             //TODO: go to waypoint
+            if(args[0].equalsIgnoreCase("help")){
+                player.sendMessage(ChatColor.GREEN + player.getLocale());
+            }
         }else if(args.length == 3){
             //TODO: go to position
         }
