@@ -74,8 +74,8 @@ public class Tp implements CommandExecutor {
                 }
                 if(!succeed){
                     String locale404 = "";
-                    if(player.getLocale().equals("hu_hu")) locale404 = "A(z) " + args[0] + " helyszín nem található!";
-                    else locale404 = "The place named " + args[0] + " not found!";
+                    if(player.getLocale().equals("hu_hu")) locale404 = "A(z) " + place + " helyszín nem található!";
+                    else locale404 = "The place named " + place + " not found!";
                     player.sendMessage(ChatColor.DARK_RED + locale404);
                 }
             }
