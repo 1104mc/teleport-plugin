@@ -31,7 +31,7 @@ public class Tp implements CommandExecutor {
         if(args.length == 0){
             MainMenu.openMainMenu(player);
         }else if(args.length == 1){
-            //TODO: go to waypoint
+            // go to waypoint
             if(args[0].equalsIgnoreCase("help")){
                 String locatedTitle = "";
                 if(player.getLocale().equals("en_us")) locatedTitle = "The places where you can go";
@@ -43,6 +43,26 @@ public class Tp implements CommandExecutor {
                     msg.setColor(waypoint.getColor().asBungee());
                     msg.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, waypoint.getCommandSuggest()));
                     player.spigot().sendMessage(msg);
+                }
+            }else{
+                boolean succeed = false;
+                for (Waypoint wp: Teleport.waypoints) {
+                    if(wp.getName(false).equals(args[0])){
+                        succeed = true;
+                        player.teleport(wp.getLocation());
+                        String localeSuccess = "";
+                        if(player.getLocale().equals("hu_hu")) localeSuccess = player.getName() +
+                                " sikeresen teleportálva a(z) " + wp.getName(false) + " helyre.";
+                        else localeSuccess = player.getName() + " has teleported successfully to " + wp.getName(false);
+                        player.sendMessage(ChatColor.GREEN + localeSuccess);
+                        break;
+                    }
+                }
+                if(!succeed){
+                    String locale404 = "";
+                    if(player.getLocale().equals("hu_hu")) locale404 = "A(z) " + args[0] + " helyszín nem található!";
+                    else locale404 = "The place named " + args[0] + " not found!";
+                    player.sendMessage(ChatColor.DARK_RED + locale404);
                 }
             }
         }else if(args.length == 3){
