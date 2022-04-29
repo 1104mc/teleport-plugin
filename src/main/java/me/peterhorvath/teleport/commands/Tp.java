@@ -28,6 +28,7 @@ public class Tp implements CommandExecutor {
         if(!(sender instanceof Player)) return false;
         Player player = ((Player) sender).getPlayer();
         assert player != null;
+        Teleport.logger.info(label);
         if(args.length == 0){
             MainMenu.openMainMenu(player);
         }else if(args.length == 1 || label.startsWith("tp \"")){
@@ -61,7 +62,7 @@ public class Tp implements CommandExecutor {
                 boolean succeed = false;
                 Teleport.logger.info("Preparing to teleport player " + player.getName() + " to " + place);
                 for (Waypoint wp: Teleport.waypoints) {
-                    if(wp.getName(false).equals(args[0])){
+                    if(wp.getName(false).equals(place)){
                         succeed = true;
                         player.teleport(wp.getLocation());
                         String localeSuccess = "";
