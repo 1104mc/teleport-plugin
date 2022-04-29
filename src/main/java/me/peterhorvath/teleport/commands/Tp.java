@@ -27,7 +27,7 @@ public class Tp implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!(sender instanceof Player)) return false;
         Player player = ((Player) sender).getPlayer();
-        Teleport.logger.info("Number of arguments");
+        Teleport.logger.info("Number of arguments: " + args.length);
         assert player != null;
         if(args.length == 0){
             MainMenu.openMainMenu(player);
