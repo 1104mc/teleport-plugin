@@ -40,12 +40,21 @@ public class Waypoint {
         return color + name;
     }
 
+    public String getName(boolean colored){
+        if(!colored) return name;
+        else return getName();
+    }
+
+    public ChatColor getColor() {
+        return color;
+    }
+
     @Override
     public String toString(){
         return getName() + " at " + getLocation();
     }
 
-    public String toLocaleString(String locale){
+    public String toLocaleString(String locale, boolean colored){
         String localedAt = "";
         if(locale.equals("en_us")) localedAt = " at ";
         else if(locale.equals("hu_hu")) localedAt = " itt: ";
@@ -61,6 +70,14 @@ public class Waypoint {
             else localedWorld = "in the normal world";
         }
         Location loc = getLocation();
-        return getName() + localedAt + "X: " + loc.getBlockX() + " Y: " + loc.getBlockY() + " Z: " + loc.getBlockZ() + " " + localedWorld;
+        return getName(colored) + localedAt + "X: " + loc.getBlockX() + " Y: " + loc.getBlockY() + " Z: " + loc.getBlockZ() + " " + localedWorld;
+    }
+
+    public String toLocaleString(String locale){
+        return toLocaleString(locale, false);
+    }
+
+    public String getCommandSuggest(){
+        return "/tp " + this.name;
     }
 }

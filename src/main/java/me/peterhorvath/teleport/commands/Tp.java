@@ -4,6 +4,8 @@ import me.peterhorvath.teleport.Teleport;
 import me.peterhorvath.teleport.gui.MainMenu;
 
 import me.peterhorvath.teleport.model.Waypoint;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -37,7 +39,10 @@ public class Tp implements CommandExecutor {
                 player.sendMessage(ChatColor.GREEN + locatedTitle);
 
                 for (Waypoint waypoint: Teleport.waypoints) {
-                    player.sendMessage(waypoint.toLocaleString(player.getLocale()));
+                    TextComponent msg = new TextComponent(waypoint.toLocaleString(player.getLocale()));
+                    msg.setColor(waypoint.getColor().asBungee());
+                    msg.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, waypoint.getCommandSuggest()));
+                    player.spigot().sendMessage(msg);
                 }
             }
         }else if(args.length == 3){
