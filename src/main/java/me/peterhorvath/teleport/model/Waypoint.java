@@ -85,6 +85,6 @@ public class Waypoint {
     }
 
     public String getCommandSuggest(){
-        return "/tp " + this.name;
+        return "/tp " + this.id;
     }
 }
