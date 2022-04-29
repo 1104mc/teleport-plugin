@@ -2,7 +2,10 @@ package me.peterhorvath.teleport.utils;
 
 import me.peterhorvath.teleport.Teleport;
 import me.peterhorvath.teleport.model.Waypoint;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -49,13 +52,21 @@ public class ConfigUtil {
         }
     }
 
+    private Location getLocationBySection(ConfigurationSection sect){
+        String world = sect.getString("world");
+        int x = sect.getInt("x");
+        int y = sect.getInt("y");
+        int z = sect.getInt("z");
+        return new Location(Bukkit.getWorld(world), x, y, z);
+    }
+
     public ArrayList<Waypoint> getAllWaypoints(){
         ArrayList<Waypoint> waypoints = new ArrayList<>();
         this.config.getConfigurationSection("places").getKeys(false).forEach(waypoint -> {
             String wp_path = "places." + waypoint;
             Waypoint wp = new Waypoint(this.getMaterialByString(this.config.getString(wp_path + ".type")),
                     ColorManager.getColorByString(this.config.getString(wp_path + ".color")),
-                    this.config.getLocation(wp_path + ".location"),
+                    this.getLocationBySection(this.config.getConfigurationSection(wp_path + ".location")),
                     this.config.getString(wp_path + ".name"));
             waypoints.add(wp);
         });
