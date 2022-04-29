@@ -61,7 +61,7 @@ public class Tp implements CommandExecutor {
                 boolean succeed = false;
                 Teleport.logger.info("Preparing to teleport player " + player.getName() + " to " + place);
                 for (Waypoint wp: Teleport.waypoints) {
-                    if(wp.getName(false).equals(place)){
+                    if(wp.getId().equals(place)){
                         succeed = true;
                         player.teleport(wp.getLocation());
                         String localeSuccess = "";

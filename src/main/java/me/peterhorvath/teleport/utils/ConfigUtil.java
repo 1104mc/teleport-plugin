@@ -67,7 +67,7 @@ public class ConfigUtil {
             Waypoint wp = new Waypoint(this.getMaterialByString(this.config.getString(wp_path + ".type")),
                     ColorManager.getColorByString(this.config.getString(wp_path + ".color")),
                     this.getLocationBySection(this.config.getConfigurationSection(wp_path + ".location")),
-                    this.config.getString(wp_path + ".name"));
+                    this.config.getString(wp_path + ".name"), this.config.getString(wp_path+".id"));
             waypoints.add(wp);
         });
         return waypoints;

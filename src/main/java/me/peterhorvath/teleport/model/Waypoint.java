@@ -10,13 +10,15 @@ public class Waypoint {
     private final ItemStack item;
     private final Location location;
     private final String name;
+    private final String id;
     private final ChatColor color;
 
-    public Waypoint(Material type, ChatColor color, Location location, String name) {
+    public Waypoint(Material type, ChatColor color, Location location, String name, String id) {
         this.location = location;
         this.name = name;
         this.color = color;
         this.item = createItemStack(type);
+        this.id = id;
     }
 
     private ItemStack createItemStack(Material type){
@@ -49,6 +51,10 @@ public class Waypoint {
         return color;
     }
 
+    public String getId() {
+        return id;
+    }
+
     @Override
     public String toString(){
         return getName() + " at " + getLocation();
@@ -70,7 +76,8 @@ public class Waypoint {
             else localedWorld = "in the normal world";
         }
         Location loc = getLocation();
-        return getName(colored) + localedAt + "X: " + loc.getBlockX() + " Y: " + loc.getBlockY() + " Z: " + loc.getBlockZ() + " " + localedWorld;
+        return getName(colored) + "(id: " + getId() + " )" + localedAt +
+                "X: " + loc.getBlockX() + " Y: " + loc.getBlockY() + " Z: " + loc.getBlockZ() + " " + localedWorld;
     }
 
     public String toLocaleString(String locale){
