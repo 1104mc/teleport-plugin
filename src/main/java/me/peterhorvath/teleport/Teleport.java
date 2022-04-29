@@ -9,13 +9,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.EOFException;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.logging.Logger;
 
 public final class Teleport extends JavaPlugin {
     public static File configDir;
     public static ConfigUtil waypointConfig;
-    public static Waypoint[] waypoints;
+    public static ArrayList<Waypoint> waypoints;
     public static Logger logger;
 
     @Override

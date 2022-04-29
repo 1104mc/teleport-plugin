@@ -49,7 +49,7 @@ public class ConfigUtil {
         }
     }
 
-    public Waypoint[] getAllWaypoints(){
+    public ArrayList<Waypoint> getAllWaypoints(){
         ArrayList<Waypoint> waypoints = new ArrayList<>();
         this.config.getConfigurationSection("places").getKeys(false).forEach(waypoint -> {
             String wp_path = "places." + waypoint;
@@ -59,7 +59,7 @@ public class ConfigUtil {
                     this.config.getString(wp_path + ".name"));
             waypoints.add(wp);
         });
-        return (Waypoint[]) waypoints.toArray();
+        return waypoints;
     }
 
     public void reload(){
