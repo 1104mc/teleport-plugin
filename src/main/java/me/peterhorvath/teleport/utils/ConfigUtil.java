@@ -32,11 +32,28 @@ public class ConfigUtil {
         return config;
     }
 
+    private Material getMaterialByString(String val){
+        switch (val.toLowerCase()){
+            case "iron":
+                return Material.IRON_INGOT;
+            case "red_bed":
+                return Material.RED_BED;
+            case "zombie_head":
+                return Material.ZOMBIE_HEAD;
+            case "bell":
+                return Material.BELL;
+            case "sword":
+                return Material.NETHERITE_SWORD;
+            default:
+                return Material.STRUCTURE_BLOCK;
+        }
+    }
+
     public Waypoint[] getAllWaypoints(){
         ArrayList<Waypoint> waypoints = new ArrayList<>();
         this.config.getConfigurationSection("places").getKeys(false).forEach(waypoint -> {
             String wp_path = "places." + waypoint;
-            Waypoint wp = new Waypoint(Material.getMaterial(this.config.getString(wp_path + ".type")),
+            Waypoint wp = new Waypoint(this.getMaterialByString(this.config.getString(wp_path + ".type")),
                     ColorManager.getColorByString(this.config.getString(wp_path + ".color")),
                     this.config.getLocation(wp_path + ".location"),
                     this.config.getString(wp_path + ".name"));
