@@ -47,6 +47,8 @@ public class ConfigUtil {
                 return Material.BELL;
             case "sword":
                 return Material.NETHERITE_SWORD;
+            case "blaze":
+                return Material.BLAZE_ROD;
             default:
                 return Material.STRUCTURE_BLOCK;
         }

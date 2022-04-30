@@ -18,6 +18,8 @@ public class ColorManager {
                 return ChatColor.GOLD;
             case "aqua":
                 return ChatColor.AQUA;
+            case "gray":
+                return ChatColor.GRAY;
             default:
                 break;
         }

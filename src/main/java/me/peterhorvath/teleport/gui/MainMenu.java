@@ -30,7 +30,6 @@ public class MainMenu {
         assert wsMeta != null;
         wsMeta.setDisplayName(ChatColor.GOLD + "Teleportálás állomásra");
         waystoneItem.setItemMeta(wsMeta);
-        Teleport.logger.info(Objects.requireNonNull(waystoneItem.getItemMeta()).getDisplayName());
         inv.setItem(3, waystoneItem);
         player.openInventory(inv);
     }
