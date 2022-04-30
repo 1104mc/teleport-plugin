@@ -2,6 +2,7 @@ package me.peterhorvath.teleport.model;
 
 import me.peterhorvath.teleport.Teleport;
 import org.bukkit.*;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -61,6 +62,10 @@ public class Waypoint {
         return id;
     }
 
+    public boolean checkDimension(World checkingWorld){
+        return this.location.getWorld().getName().equals(checkingWorld.getName());
+    }
+
     @Override
     public String toString(){
         return getName() + " at " + getLocation();
@@ -94,6 +99,15 @@ public class Waypoint {
         return "/tp " + this.id;
     }
 
+    public void teleportPlayer(Player player){
+        player.teleport(this.location);
+        String localeSuccess = "";
+        if(player.getLocale().equals("hu_hu")) localeSuccess = player.getName() +
+                " sikeresen teleportálva a(z) " + getName(false) + " helyre.";
+        else localeSuccess = player.getName() + " has teleported successfully to " + getName(false);
+        player.sendMessage(localeSuccess);
+    }
+
     public static ArrayList<Waypoint> getWaypointsInTheSameWorld(World world, ArrayList<Waypoint> allPoints){
         allPoints.removeIf(wp -> !Objects.equals(wp.getLocation().getWorld().getName(), world.getName()));
         return allPoints;
@@ -101,17 +115,5 @@ public class Waypoint {
 
     public static ArrayList<Waypoint> getWaypointsInTheSameWorld(World world){
         return getWaypointsInTheSameWorld(world, Teleport.waypoints);
-    }
-
-    public static Waypoint getWaypointByIdRow(String idRow){
-        String id = idRow.split("id: ")[0];
-        Waypoint out = null;
-        for (Waypoint wp: Teleport.waypoints) {
-            if(wp.getId().equals(id)) {
-                out = wp;
-                break;
-            }
-        }
-        return out;
     }
 }

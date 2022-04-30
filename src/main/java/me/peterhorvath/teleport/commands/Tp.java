@@ -63,12 +63,7 @@ public class Tp implements CommandExecutor {
                 for (Waypoint wp: Teleport.waypoints) {
                     if(wp.getId().equals(place)){
                         succeed = true;
-                        player.teleport(wp.getLocation());
-                        String localeSuccess = "";
-                        if(player.getLocale().equals("hu_hu")) localeSuccess = player.getName() +
-                                " sikeresen teleportálva a(z) " + wp.getName(false) + " helyre.";
-                        else localeSuccess = player.getName() + " has teleported successfully to " + wp.getName(false);
-                        player.sendMessage(ChatColor.GREEN + localeSuccess);
+                        wp.teleportPlayer(player);
                         break;
                     }
                 }

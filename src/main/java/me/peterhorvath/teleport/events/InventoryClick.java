@@ -56,7 +56,7 @@ public class InventoryClick implements Listener {
                 ArrayList<Waypoint> wps = Waypoint.getWaypointsInTheSameWorld(player.getWorld());
                 Waypoint waypoint = wps.get(event.getSlot());
                 player.closeInventory();
-                player.teleport(waypoint.getLocation());
+                waypoint.teleportPlayer(player);
             default:
                 break;
         }
