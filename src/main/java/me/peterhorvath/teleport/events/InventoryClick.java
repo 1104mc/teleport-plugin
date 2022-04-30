@@ -4,12 +4,14 @@ import me.peterhorvath.teleport.Teleport;
 import me.peterhorvath.teleport.gui.TeleportConfirm;
 import me.peterhorvath.teleport.gui.TeleportToMenu;
 import me.peterhorvath.teleport.gui.TeleportToWaypointMenu;
+import me.peterhorvath.teleport.model.Waypoint;
 import me.peterhorvath.teleport.utils.pickers.ColorPicker;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.Objects;
@@ -48,6 +50,15 @@ public class InventoryClick implements Listener {
                     player.teleport(target.getLocation());
                 }
                 break;
+            case "Waypoints":
+                if(event.getCurrentItem() == null) break;
+                if(!event.getCurrentItem().hasItemMeta()) break;
+                ItemMeta imeta = event.getCurrentItem().getItemMeta();
+                assert imeta != null;
+                String id = imeta.getLore().get(imeta.getLore().size() - 1);
+                Waypoint waypoint = Waypoint.getWaypointByIdRow(id);
+                player.closeInventory();
+                player.teleport(waypoint.getLocation());
             default:
                 break;
         }

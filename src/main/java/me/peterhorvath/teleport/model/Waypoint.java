@@ -28,6 +28,10 @@ public class Waypoint {
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
         meta.setDisplayName(color + this.name);
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("Pozítció: X:" + getLocation().getBlockX() + " Y: " + getLocation().getBlockY() + " Z: " + getLocation().getBlockZ());
+        lore.add("id: " + getId());
+        meta.setLore(lore);
         item.setItemMeta(meta);
         return item;
     }
@@ -97,5 +101,17 @@ public class Waypoint {
 
     public static ArrayList<Waypoint> getWaypointsInTheSameWorld(World world){
         return getWaypointsInTheSameWorld(world, Teleport.waypoints);
+    }
+
+    public static Waypoint getWaypointByIdRow(String idRow){
+        String id = idRow.split("id: ")[0];
+        Waypoint out = null;
+        for (Waypoint wp: Teleport.waypoints) {
+            if(wp.getId().equals(id)) {
+                out = wp;
+                break;
+            }
+        }
+        return out;
     }
 }
