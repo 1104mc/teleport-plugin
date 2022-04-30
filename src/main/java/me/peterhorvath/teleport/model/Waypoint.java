@@ -91,7 +91,7 @@ public class Waypoint {
     }
 
     public static ArrayList<Waypoint> getWaypointsInTheSameWorld(World world, ArrayList<Waypoint> allPoints){
-        allPoints.removeIf(wp -> Objects.equals(wp.getLocation().getWorld(), world));
+        allPoints.removeIf(wp -> !Objects.equals(wp.getLocation().getWorld().getName(), world.getName()));
         return allPoints;
     }
 
