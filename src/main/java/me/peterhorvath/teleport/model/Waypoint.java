@@ -1,10 +1,12 @@
 package me.peterhorvath.teleport.model;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import me.peterhorvath.teleport.Teleport;
+import org.bukkit.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class Waypoint {
     private final ItemStack item;
@@ -86,5 +88,14 @@ public class Waypoint {
 
     public String getCommandSuggest(){
         return "/tp " + this.id;
+    }
+
+    public static ArrayList<Waypoint> getWaypointsInTheSameWorld(World world, ArrayList<Waypoint> allPoints){
+        allPoints.removeIf(wp -> Objects.equals(wp.getLocation().getWorld(), world));
+        return allPoints;
+    }
+
+    public static ArrayList<Waypoint> getWaypointsInTheSameWorld(World world){
+        return getWaypointsInTheSameWorld(world, Teleport.waypoints);
     }
 }

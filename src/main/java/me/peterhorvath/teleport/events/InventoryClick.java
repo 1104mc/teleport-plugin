@@ -3,6 +3,7 @@ package me.peterhorvath.teleport.events;
 import me.peterhorvath.teleport.Teleport;
 import me.peterhorvath.teleport.gui.TeleportConfirm;
 import me.peterhorvath.teleport.gui.TeleportToMenu;
+import me.peterhorvath.teleport.gui.TeleportToWaypointMenu;
 import me.peterhorvath.teleport.utils.pickers.ColorPicker;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -28,7 +29,7 @@ public class InventoryClick implements Listener {
                         TeleportToMenu.openTeleportToPlayerMenu(player);
                         break;
                     case EMERALD:
-                        //TODO: open teleport to waypoint menu
+                        TeleportToWaypointMenu.openInventory(player);
                         break;
                     default:
                         break;
@@ -61,6 +62,4 @@ public class InventoryClick implements Listener {
         }
         event.setCancelled(true);
     }
-
-    //TODO: manage pickers and waypoint creation porcess
 }
