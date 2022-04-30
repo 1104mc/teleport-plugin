@@ -1,5 +1,6 @@
 package me.peterhorvath.teleport.gui;
 
+import me.peterhorvath.teleport.Teleport;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -8,6 +9,8 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.Objects;
 
 
 public class MainMenu {
@@ -27,6 +30,7 @@ public class MainMenu {
         assert wsMeta != null;
         wsMeta.setDisplayName(ChatColor.GOLD + "Teleportálás állomásra");
         waystoneItem.setItemMeta(wsMeta);
+        Teleport.logger.info(Objects.requireNonNull(waystoneItem.getItemMeta()).getDisplayName());
         inv.setItem(3, waystoneItem);
         player.openInventory(inv);
     }
