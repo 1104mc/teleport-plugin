@@ -14,6 +14,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.logging.Level;
 
@@ -53,10 +54,8 @@ public class InventoryClick implements Listener {
             case "Waypoints":
                 if(event.getCurrentItem() == null) break;
                 if(!event.getCurrentItem().hasItemMeta()) break;
-                ItemMeta imeta = event.getCurrentItem().getItemMeta();
-                assert imeta != null;
-                String id = imeta.getLore().get(imeta.getLore().size() - 1);
-                Waypoint waypoint = Waypoint.getWaypointByIdRow(id);
+                ArrayList<Waypoint> wps = Waypoint.getWaypointsInTheSameWorld(player.getWorld());
+                Waypoint waypoint = wps.get(event.getSlot());
                 player.closeInventory();
                 player.teleport(waypoint.getLocation());
             default:
