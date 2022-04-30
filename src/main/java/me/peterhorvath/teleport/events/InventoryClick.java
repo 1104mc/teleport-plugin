@@ -51,7 +51,7 @@ public class InventoryClick implements Listener {
                     player.teleport(target.getLocation());
                 }
                 break;
-            case "Waypoints":
+            case "Teleport states":
                 Teleport.logger.info("Waypoints slot: " + event.getSlot());
                 ArrayList<Waypoint> wps = Waypoint.getWaypointsInTheSameWorld(player.getWorld());
                 Waypoint waypoint = wps.get(event.getSlot());
