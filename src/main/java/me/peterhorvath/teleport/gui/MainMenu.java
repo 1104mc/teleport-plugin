@@ -1,6 +1,7 @@
 package me.peterhorvath.teleport.gui;
 
 import me.peterhorvath.teleport.Teleport;
+import me.peterhorvath.teleport.utils.LocaleUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,23 +16,30 @@ import java.util.Objects;
 
 public class MainMenu {
     public static void openMainMenu(Player player){
-        Inventory inv = Bukkit.createInventory(player, InventoryType.HOPPER, "Teleport menü");
+        Inventory inv = Bukkit.createInventory(player, InventoryType.HOPPER,
+                LocaleUtil.getLocaledMenuTitle(player.getLocale(), LocaleUtil.UIMenu.MainMenu));
+        inv.setItem(1, getTeleportToPlayerItem(player)); //Player Head item
+        inv.setItem(3, getTeleportToWaypointItem(player)); //Waystone Item
+        player.openInventory(inv);
+    }
 
-        //Player Head item
+    private static ItemStack getTeleportToPlayerItem(Player player){
         ItemStack playerItem = new ItemStack(Material.PLAYER_HEAD);
         ItemMeta playerMeta = playerItem.getItemMeta();
         assert playerMeta != null;
-        playerMeta.setDisplayName("Teleportálás játékoshoz!");
+        playerMeta.setDisplayName(LocaleUtil.getTextByLocale("hu_hu", player.getLocale(), "Teleportálás játékoshoz!", "Teleport to player!"));
         playerItem.setItemMeta(playerMeta);
-        inv.setItem(1, playerItem);
-        //Waystone Item
+        return playerItem;
+    }
+
+    private static ItemStack getTeleportToWaypointItem(Player player){
         ItemStack waystoneItem = new ItemStack(Material.EMERALD);
-        ItemMeta wsMeta = playerItem.getItemMeta();
+        ItemMeta wsMeta = waystoneItem.getItemMeta();
         assert wsMeta != null;
-        wsMeta.setDisplayName(ChatColor.GOLD + "Teleportálás állomásra");
+        wsMeta.setDisplayName(ChatColor.GOLD +
+                LocaleUtil.getTextByLocale("hu_hu", player.getLocale(), "Teleportálás célállomáshoz", "Teleport to waypoint"));
         waystoneItem.setItemMeta(wsMeta);
-        inv.setItem(3, waystoneItem);
-        player.openInventory(inv);
+        return waystoneItem;
     }
 
 }

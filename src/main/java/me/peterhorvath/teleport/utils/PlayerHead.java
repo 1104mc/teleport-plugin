@@ -1,4 +1,4 @@
-package me.peterhorvath.teleport.gui;
+package me.peterhorvath.teleport.utils;
 
 import me.peterhorvath.teleport.Teleport;
 import org.bukkit.ChatColor;
@@ -19,7 +19,7 @@ public class PlayerHead {
         SkullMeta meta = (SkullMeta) skull.getItemMeta();
         assert meta != null;
         meta.setOwningPlayer(player);
-        meta.setDisplayName(color + "Teleportálás " + player.getDisplayName() + " játékoshoz!");
+        meta.setDisplayName(color + LocaleUtil.getLocaledTeleportMsg(player.getLocale(), player.getDisplayName()));
         if(debug) Teleport.getPlugin(Teleport.class).getLogger().log(Level.INFO, "Created head for player "
                 + player.getDisplayName());
         skull.setItemMeta(meta);

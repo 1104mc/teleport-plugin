@@ -10,15 +10,18 @@ import java.util.ArrayList;
 
 public class TeleportToWaypointMenu {
     public static void openInventory(Player player){
+        //creating the inventory
         ArrayList<Waypoint> waypoints = Waypoint.getWaypointsInTheSameWorld(player.getWorld());
         Inventory inv;
         String title = "Teleport states";
         if(waypoints.size() <= 5) inv = Bukkit.createInventory(player, InventoryType.HOPPER, title);
         else if(waypoints.size() <= 9) inv = Bukkit.createInventory(player, 9, title);
         else inv = Bukkit.createInventory(player, waypoints.size(), title);
+        //adding waypoint items
         for (Waypoint wp: waypoints) {
             inv.addItem(wp.getItem());
         }
+        //open the inventory
         player.openInventory(inv);
     }
 }
