@@ -51,7 +51,7 @@ public class LocaleUtil {
             case "Teleportálás játékoshoz":
             case "Teleport to player":
                 return UIMenu.TeleportToPlayer;
-            case "Teleportálás":
+            case "Teleportálás célállomáshoz":
             case "Teleport to destination":
                 return UIMenu.TeleportToWaypoint;
             default:
