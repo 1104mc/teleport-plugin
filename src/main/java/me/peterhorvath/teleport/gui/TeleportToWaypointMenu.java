@@ -1,6 +1,7 @@
 package me.peterhorvath.teleport.gui;
 
 import me.peterhorvath.teleport.model.Waypoint;
+import me.peterhorvath.teleport.utils.LocaleUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -13,7 +14,7 @@ public class TeleportToWaypointMenu {
         //creating the inventory
         ArrayList<Waypoint> waypoints = Waypoint.getWaypointsInTheSameWorld(player.getWorld());
         Inventory inv;
-        String title = "Teleport states";
+        String title = LocaleUtil.getLocaledMenuTitle(player.getLocale(), LocaleUtil.UIMenu.TeleportToWaypoint);
         if(waypoints.size() <= 5) inv = Bukkit.createInventory(player, InventoryType.HOPPER, title);
         else if(waypoints.size() <= 9) inv = Bukkit.createInventory(player, 9, title);
         else inv = Bukkit.createInventory(player, waypoints.size(), title);
