@@ -52,7 +52,7 @@ public class LocaleUtil {
             case "Teleport to player":
                 return UIMenu.TeleportToPlayer;
             case "Teleportálás":
-            case "Teleport to Waypoint":
+            case "Teleport to destination":
                 return UIMenu.TeleportToWaypoint;
             default:
                 return null;
