@@ -19,7 +19,6 @@ public class MainMenu {
         Inventory inv = Bukkit.createInventory(player, InventoryType.HOPPER,
                 LocaleUtil.getLocaledMenuTitle(player.getLocale(), LocaleUtil.UIMenu.MainMenu));
         inv.setItem(1, getTeleportToPlayerItem(player)); //Player Head item
-        inv.setItem(3, getTeleportToWaypointItem(player)); //Waystone Item
         player.openInventory(inv);
     }
 
@@ -31,15 +30,4 @@ public class MainMenu {
         playerItem.setItemMeta(playerMeta);
         return playerItem;
     }
-
-    private static ItemStack getTeleportToWaypointItem(Player player){
-        ItemStack waystoneItem = new ItemStack(Material.EMERALD);
-        ItemMeta wsMeta = waystoneItem.getItemMeta();
-        assert wsMeta != null;
-        wsMeta.setDisplayName(ChatColor.GOLD +
-                LocaleUtil.getTextByLocale("hu_hu", player.getLocale(), "Teleportálás célállomáshoz", "Teleport to waypoint"));
-        waystoneItem.setItemMeta(wsMeta);
-        return waystoneItem;
-    }
-
 }

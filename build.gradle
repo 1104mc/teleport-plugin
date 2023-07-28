@@ -9,41 +9,27 @@ plugins {
 }
 
 repositories {
-    mavenLocal()
+    mavenCentral()
     maven {
-        url = uri('https://hub.spigotmc.org/nexus/content/repositories/snapshots/')
+        name = "papermc-repo"
+        url = "https://repo.papermc.io/repository/maven-public/"
     }
-
     maven {
-        url = uri('https://oss.sonatype.org/content/groups/public/')
-    }
-
-    maven {
-        url = uri('https://repo.maven.apache.org/maven2/')
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
     }
 }
 
 dependencies {
-    compileOnly 'org.spigotmc:spigot-api:1.18.1-R0.1-SNAPSHOT'
+    compileOnly 'io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT'
 }
 
 group = 'me.peterhorvath'
 version = '1.2'
 description = 'Teleport'
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
-targetCompatibility = JavaVersion.VERSION_11
-
-tasks.register('fatJar', Jar) {
-    archiveClassifier = 'all'
-    dependsOn jar
-    from sourceSets.main.output
-
-    dependsOn configurations.runtimeClasspath
-    from {
-        configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
-    }
-}
+targetCompatibility = JavaVersion.VERSION_17
