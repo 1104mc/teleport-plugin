@@ -1,6 +1,7 @@
 package me.peterhorvath.teleport.commands;
 
 import me.peterhorvath.teleport.gui.MainMenu;
+import me.peterhorvath.teleport.gui.TeleportToPlayerMenu;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,7 +15,7 @@ public class Tp implements CommandExecutor {
         Player player = ((Player) sender).getPlayer();
         assert player != null;
         if(args.length == 0){
-            MainMenu.openMainMenu(player);
+            TeleportToPlayerMenu.openTeleportToPlayerMenu(player);
         }else if(args.length == 3){
             //TODO: go to position
         }

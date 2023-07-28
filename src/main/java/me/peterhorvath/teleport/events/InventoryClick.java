@@ -2,6 +2,7 @@ package me.peterhorvath.teleport.events;
 
 import me.peterhorvath.teleport.gui.TeleportToPlayerMenu;
 import me.peterhorvath.teleport.utils.LocaleUtil;
+import me.peterhorvath.teleport.utils.TeleportUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,7 +34,7 @@ public class InventoryClick implements Listener {
                 if(meta == null) break;
                 Player target = (Player) meta.getOwningPlayer();
                 assert target != null;
-                player.teleport(target);
+                TeleportUtil.askForTeleport(player, target);
                 break;
         }
         event.setCancelled(true);

@@ -1,7 +1,9 @@
 package me.peterhorvath.teleport;
 
+import me.peterhorvath.teleport.commands.AcceptRejectTeleportCommand;
 import me.peterhorvath.teleport.commands.Tp;
 import me.peterhorvath.teleport.events.InventoryClick;
+import me.peterhorvath.teleport.utils.TeleportUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -18,7 +20,10 @@ public final class Teleport extends JavaPlugin {
         logger = getLogger();
         configDir = getDataFolder();
         Objects.requireNonNull(getCommand("tp")).setExecutor(new Tp());
+        Objects.requireNonNull(getCommand("tpa")).setExecutor(new AcceptRejectTeleportCommand());
+        Objects.requireNonNull(getCommand("tpr")).setExecutor(new AcceptRejectTeleportCommand());
         getServer().getPluginManager().registerEvents(new InventoryClick(), this);
+        TeleportUtil.init();
     }
 
     @Override
