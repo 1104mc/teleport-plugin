@@ -40,7 +40,6 @@ public class LocaleUtil {
     public enum UIMenu{
         MainMenu,
         TeleportToPlayer,
-        TeleportToWaypoint
     }
 
     public static UIMenu getMenuByLocaledName(String menuTitle){
@@ -51,9 +50,6 @@ public class LocaleUtil {
             case "Teleportálás játékoshoz":
             case "Teleport to player":
                 return UIMenu.TeleportToPlayer;
-            case "Teleportálás célállomáshoz":
-            case "Teleport to destination":
-                return UIMenu.TeleportToWaypoint;
             default:
                 return null;
         }
@@ -65,8 +61,6 @@ public class LocaleUtil {
                 return getTextByLocale("hu_hu", locale, "Teleport menü", "Teleport menu");
             case TeleportToPlayer:
                 return getTextByLocale("hu_hu", locale, "Teleportálás játékoshoz", "Teleport to player");
-            case TeleportToWaypoint:
-                return getTextByLocale("hu_hu", locale, "Teleportálás célállomáshoz", "Teleport to destination");
             default:
                 return "Error! We can't find menu";
         }

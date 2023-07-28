@@ -5,5 +5,3 @@ api-version: 1.18
 commands:
   tp:
     description: "teleport command"
-  reload:
-    description: "reload config"

@@ -1,9 +1,6 @@
 package me.peterhorvath.teleport.events;
 
-import me.peterhorvath.teleport.Teleport;
 import me.peterhorvath.teleport.gui.TeleportToPlayerMenu;
-import me.peterhorvath.teleport.gui.TeleportToWaypointMenu;
-import me.peterhorvath.teleport.model.Waypoint;
 import me.peterhorvath.teleport.utils.LocaleUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,7 +8,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class InventoryClick implements Listener {
@@ -27,9 +23,6 @@ public class InventoryClick implements Listener {
                     case PLAYER_HEAD:
                         TeleportToPlayerMenu.openTeleportToPlayerMenu(player);
                         break;
-                    case EMERALD:
-                        TeleportToWaypointMenu.openInventory(player);
-                        break;
                     default:
                         break;
                 }
@@ -42,12 +35,6 @@ public class InventoryClick implements Listener {
                 assert target != null;
                 player.teleport(target);
                 break;
-            case TeleportToWaypoint:
-                Teleport.logger.info("Waypoints slot: " + event.getSlot());
-                ArrayList<Waypoint> wps = Waypoint.getWaypointsInTheSameWorld(player.getWorld());
-                Waypoint waypoint = wps.get(event.getSlot());
-                player.closeInventory();
-                waypoint.teleportPlayer(player);
         }
         event.setCancelled(true);
     }
