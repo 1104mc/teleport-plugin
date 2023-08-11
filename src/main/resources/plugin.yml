@@ -3,9 +3,7 @@ version: 1.2
 main: me.peterhorvath.teleport.Teleport
 api-version: 1.20
 commands:
-  tp:
-    description: "teleport command"
   tpa:
+    description: "teleport command"
+  tpaccept:
     description: "accept teleport"
-  tpr:
-    description: "reject teleport"
