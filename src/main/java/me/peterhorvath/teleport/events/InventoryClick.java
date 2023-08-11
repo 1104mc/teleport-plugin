@@ -35,6 +35,7 @@ public class InventoryClick implements Listener {
                 Player target = (Player) meta.getOwningPlayer();
                 assert target != null;
                 TeleportUtil.askForTeleport(player, target);
+                Objects.requireNonNull(event.getClickedInventory()).close();
                 break;
         }
         event.setCancelled(true);

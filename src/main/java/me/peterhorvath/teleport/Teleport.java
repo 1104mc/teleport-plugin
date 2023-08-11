@@ -21,6 +21,7 @@ public final class Teleport extends JavaPlugin {
         configDir = getDataFolder();
         Objects.requireNonNull(getCommand("tpa")).setExecutor(new Tp());
         Objects.requireNonNull(getCommand("tpaccept")).setExecutor(new AcceptRejectTeleportCommand());
+        Objects.requireNonNull(getCommand("tpaccept")).setTabCompleter(new AcceptRejectTeleportCommand());
         getServer().getPluginManager().registerEvents(new InventoryClick(), this);
         TeleportUtil.init();
     }

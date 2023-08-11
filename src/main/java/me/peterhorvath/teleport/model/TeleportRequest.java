@@ -20,7 +20,7 @@ public class TeleportRequest {
         this.requester = requester;
         this.target = target;
         this.deadline = LocalDateTime.now().plusMinutes(2);
-        target.sendMessage(Component.text(requester.getName()+" játékos rád szeretne teleportálni. Írd be a chatbe a /tpa parancsot az elfogadáshoz!"));
+        target.sendMessage(Component.text(requester.getName()+" játékos rád szeretne teleportálni. Írd be a chatbe a /tpaccept accept parancsot az elfogadáshoz vagy a /tpaccept deny az elutasításhoz!"));
         requester.sendMessage(Component.text("A teleport kérelmedet elküldtük "+target.getName()+" játékosnak.", NamedTextColor.GOLD));
     }
 
