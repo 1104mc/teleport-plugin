@@ -1,5 +1,6 @@
 package me.peterhorvath.teleport.model;
 
+import me.peterhorvath.teleport.utils.MessageUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -7,6 +8,7 @@ import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.entity.Player;
 
+import javax.inject.Named;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
@@ -20,7 +22,12 @@ public class TeleportRequest {
         this.requester = requester;
         this.target = target;
         this.deadline = LocalDateTime.now().plusMinutes(2);
-        target.sendMessage(Component.text(requester.getName()+" játékos rád szeretne teleportálni. Írd be a chatbe a /tpa parancsot az elfogadáshoz!"));
+        Component javaMessage = Component.text(requester.getName() + " rád szeretne teleportálni:").appendNewline()
+                        .append(Component.text("Elfogad").style(actionStyle).color(NamedTextColor.GREEN).clickEvent(ClickEvent.runCommand("/tpaccept accept")))
+                                .append(Component.text(" | ").style(actionStyle).color(NamedTextColor.WHITE))
+                                        .append(Component.text("Elutasít").style(actionStyle).color(NamedTextColor.RED).clickEvent(ClickEvent.runCommand("/tpaccept deny")));
+        String bedrockMessage = requester.getName()+" játékos rád szeretne teleportálni. Írd be a chatbe a /tpaccept accept parancsot az elfogadáshoz vagy a /tpaccept deny az elutasításhoz!";
+        target.sendMessage(MessageUtil.getClientMessage(target, javaMessage, bedrockMessage, NamedTextColor.WHITE));
         requester.sendMessage(Component.text("A teleport kérelmedet elküldtük "+target.getName()+" játékosnak.", NamedTextColor.GOLD));
     }
 
